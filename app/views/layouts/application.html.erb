@@ -9,7 +9,7 @@
 <body>
 <header>
   <% if current_user %>
-      <%= link_to "welcome:#{current_user.email}", "#" %>
+      <%= link_to "welcome:#{current_user.email}", edit_user_registration_path %>
       <%= link_to "退出", destroy_user_session_path, method: 'delete' %>
   <% end %>
 </header>
