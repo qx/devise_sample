@@ -11,8 +11,8 @@
 #
 
 class Post < ActiveRecord::Base
- validates :user_id, presence: true
- belongs_to :user
-markable_as :favorite
-
+   validates :user_id, presence: true
+   belongs_to :user
+   markable_as :favorite
+   acts_as_commentable
 end

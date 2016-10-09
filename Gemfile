@@ -32,6 +32,9 @@ gem 'devise','~> 3.5.10'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 gem 'markable', github: 'qx/markable'
+gem 'acts_as_votable', '~> 0.10.0'
+
+gem 'acts_as_commentable_with_threading', github: 'qx/acts_as_commentable_with_threading'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
