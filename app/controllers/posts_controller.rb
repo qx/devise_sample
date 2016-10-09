@@ -5,7 +5,14 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    if params[:tag]
+      @posts = Post.tagged_with(params[:tag])
+    elsif params[:skill]
+      @posts = Post.tagged_with(params[:skill])
+    else
+      @posts = Post.all
+    end
+
   end
 
   # GET /posts/1
@@ -26,12 +33,11 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-
+    byebug
     @post = current_user.posts.new(post_params)
-    byebug
-    @user_who_commented = current_user
-    @comment = Comment.build_from(@post, @user_who_commented.id, "Hey guys this is my comment!")
-    byebug
+    # byebug
+    # @user_who_commented = current_user
+    # @comment = Comment.build_from(@post, @user_who_commented.id, "Hey guys this is my comment!")
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -75,6 +81,6 @@ class PostsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:post).permit(:title, :content, :id)
+    params.require(:post).permit(:title, :content, :tag_list, :skill_list)
   end
 end

@@ -1,12 +1,25 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Posts</h1>
+<div id="tag_cloud">
+  <% tag_cloud Post.tag_counts, %w[css1 css2 css3 css4] do |tag, css_class| %>
+      <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+  <% end %>
+</div>
 
+<br/>
+<div id="skill_cloud">
+  <% tag_cloud Post.skill_counts, %w[css1 css2 css3 css4] do |skill, css_class| %>
+      <%= link_to skill.name, skill_path(skill.name), class: css_class %>
+  <% end %>
+</div>
 <table>
   <thead>
   <tr>
     <th>Title</th>
     <th>Content</th>
+    <th>tags</th>
+    <th>skills</th>
     <th colspan="3"></th>
   </tr>
   </thead>
@@ -16,6 +29,12 @@
       <tr>
         <td><%= post.title %></td>
         <td><%= post.content %></td>
+        <td><p>
+          Tags: <%= raw post.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+        </p></td>
+        <td><p>
+          Skills: <%= raw post.skill_list.map { |t| link_to t, skill_path(t) }.join(', ') %>
+        </p></td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: {confirm: 'Are you sure?'} %></td>
@@ -27,3 +46,21 @@
 <br>
 
 <%= link_to 'New Post', new_post_path %>
+<style>
+  .css1 {
+    font-size: 1.0em;
+  }
+
+  .css2 {
+    font-size: 1.2em;
+  }
+
+  .css3 {
+    font-size: 1.4em;
+  }
+
+  .css4 {
+    font-size: 1.6em;
+  }
+
+</style>

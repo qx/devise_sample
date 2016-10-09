@@ -15,4 +15,7 @@ class Post < ActiveRecord::Base
    belongs_to :user
    markable_as :favorite
    acts_as_commentable
+   acts_as_taggable # Alias for acts_as_taggable_on :tags,默认
+   acts_as_taggable_on :skills, :interests#可以有多个不同类别标签
+
 end

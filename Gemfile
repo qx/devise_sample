@@ -35,6 +35,7 @@ gem 'markable', github: 'qx/markable'
 gem 'acts_as_votable', '~> 0.10.0'
 
 gem 'acts_as_commentable_with_threading', github: 'qx/acts_as_commentable_with_threading'
+gem 'acts-as-taggable-on', '~> 4.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

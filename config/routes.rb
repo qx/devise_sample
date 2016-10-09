@@ -2,6 +2,9 @@ Rails.application.routes.draw do
   devise_for :users
   resources :posts
   root to: "posts#index"
+  get 'tags/:tag', to: 'posts#index', as: :tag
+  get 'skills/:skill', to: 'posts#index', as: :skill
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
