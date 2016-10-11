@@ -77,10 +77,11 @@ class PostsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_post
     @post = Post.find(params[:id])
+    # @post = Post.find_by(:user_id => current_user.id)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def post_params
-    params.require(:post).permit(:title, :content, :tag_list, :skill_list)
+    params.require(:post).permit(:title, :content, :tag_list, :skill_list, :cover)
   end
 end

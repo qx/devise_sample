@@ -35,6 +35,13 @@
         <td><p>
           Skills: <%= raw post.skill_list.map { |t| link_to t, skill_path(t) }.join(', ') %>
         </p></td>
+        <td>
+          <p>
+            <label>Post cover</label>
+            <%= image_tag(post.cover_url) if post.cover? %>
+          </p>
+
+        </td>
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: {confirm: 'Are you sure?'} %></td>

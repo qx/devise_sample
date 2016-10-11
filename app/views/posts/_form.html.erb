@@ -1,4 +1,4 @@
-<%= form_for(@post) do |f| %>
+<%= form_for(@post, html: {multipart: true}) do |f| %>
     <% if @post.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -27,6 +27,13 @@
       <%= f.label :skill_list, "skills (separated by commas)" %><br/>
       <%= f.text_field :skill_list %>
     </div>
+
+    <p>
+      <label>Post cover</label>
+      <%= image_tag(@post.cover_url) if @post.cover? %>
+      <%= f.file_field :cover %>
+      <%= f.hidden_field :cover_cache %>
+    </p>
     <div class="actions">
       <%= f.submit %>
     </div>
