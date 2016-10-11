@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Member Videos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Comment</th>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @member_videos.each do |member_video| %>
+      <tr>
+        <td><%= member_video.comment %></td>
+        <td><%= member_video.name %></td>
+        <td><%= link_to 'Show', member_video %></td>
+        <td><%= link_to 'Edit', edit_member_video_path(member_video) %></td>
+        <td><%= link_to 'Destroy', member_video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Video', new_member_video_path %>

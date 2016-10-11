@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :member do
+    resources :videos
+  end
+  namespace :member do
+    resources :comments
+  end
   devise_for :users
   resources :posts
   root to: "posts#index"

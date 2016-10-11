@@ -1,0 +1,24 @@
+<%= form_for(@member_comment) do |f| %>
+  <% if @member_comment.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@member_comment.errors.count, "error") %> prohibited this member_comment from being saved:</h2>
+
+      <ul>
+      <% @member_comment.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+    <div class="field">
+      <%= f.label :video_id %><br>
+      <%= f.text_field :video_id %>
+    </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

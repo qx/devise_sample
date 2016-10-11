@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Comment:</strong>
+  <%= @member_video.comment %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @member_video.name %>
+</p>
+
+<%= link_to 'Edit', edit_member_video_path(@member_video) %> |
+<%= link_to 'Back', member_videos_path %>

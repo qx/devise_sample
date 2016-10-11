@@ -1,18 +1,15 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: member_videos
 #
 #  id         :integer          not null, primary key
-#  title      :string
-#  content    :string
+#  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  user_id    :integer
-#  cover      :string
 #
 
 require 'rails_helper'
 
-RSpec.describe Post, type: :model do
+RSpec.describe Member::Video, type: :model do
   pending "add some examples to (or delete) #{__FILE__}"
 end
