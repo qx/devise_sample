@@ -1,5 +1,10 @@
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
+  respond_to :json,:html
   protect_from_forgery with: :exception
+  skip_before_action :verify_authenticity_token
+  acts_as_token_authentication_handler_for User, fallback: :none
+
+
 end
