@@ -11,17 +11,176 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161008021617) do
+ActiveRecord::Schema.define(version: 20161017092112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string   "namespace"
+    t.text     "body"
+    t.string   "resource_id",   null: false
+    t.string   "resource_type", null: false
+    t.integer  "author_id"
+    t.string   "author_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "active_admin_comments", ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id", using: :btree
+  add_index "active_admin_comments", ["namespace"], name: "index_active_admin_comments_on_namespace", using: :btree
+  add_index "active_admin_comments", ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id", using: :btree
+
+  create_table "admin_users", force: :cascade do |t|
+    t.string   "email",                  default: "", null: false
+    t.string   "encrypted_password",     default: "", null: false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.inet     "current_sign_in_ip"
+    t.inet     "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
+  add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.string   "title"
+    t.text     "body"
+    t.string   "subject"
+    t.integer  "user_id",          null: false
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["commentable_id", "commentable_type"], name: "index_comments_on_commentable_id_and_commentable_type", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "marks", id: false, force: :cascade do |t|
+    t.integer  "marker_id"
+    t.string   "marker_type"
+    t.integer  "markable_id"
+    t.string   "markable_type"
+    t.string   "mark",          limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "marks", ["markable_id", "markable_type", "mark"], name: "index_marks_on_markable_id_and_markable_type_and_mark", using: :btree
+  add_index "marks", ["marker_id", "marker_type", "mark"], name: "index_marks_on_marker_id_and_marker_type_and_mark", using: :btree
+
+  create_table "member_comments", force: :cascade do |t|
+    t.integer  "member_video_id"
+    t.string   "title"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "member_comments", ["member_video_id"], name: "index_member_comments_on_member_video_id", using: :btree
+
+  create_table "member_videos", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string   "title"
     t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "user_id"
+    t.string   "cover"
   end
+
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
+
+  create_table "products", force: :cascade do |t|
+    t.string   "title"
+    t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "survey_answers", force: :cascade do |t|
+    t.integer  "attempt_id"
+    t.integer  "question_id"
+    t.integer  "option_id"
+    t.boolean  "correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "survey_attempts", force: :cascade do |t|
+    t.integer "participant_id"
+    t.string  "participant_type"
+    t.integer "survey_id"
+    t.boolean "winner"
+    t.integer "score"
+  end
+
+  create_table "survey_options", force: :cascade do |t|
+    t.integer  "question_id"
+    t.integer  "weight",      default: 0
+    t.string   "text"
+    t.boolean  "correct"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "survey_questions", force: :cascade do |t|
+    t.integer  "survey_id"
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "survey_surveys", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "attempts_number", default: 0
+    t.boolean  "finished",        default: false
+    t.boolean  "active",          default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "survey_type"
+  end
+
+  create_table "taggings", force: :cascade do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["context"], name: "index_taggings_on_context", using: :btree
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+  add_index "taggings", ["tag_id"], name: "index_taggings_on_tag_id", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "context"], name: "index_taggings_on_taggable_id_and_taggable_type_and_context", using: :btree
+  add_index "taggings", ["taggable_id", "taggable_type", "tagger_id", "context"], name: "taggings_idy", using: :btree
+  add_index "taggings", ["taggable_id"], name: "index_taggings_on_taggable_id", using: :btree
+  add_index "taggings", ["taggable_type"], name: "index_taggings_on_taggable_type", using: :btree
+  add_index "taggings", ["tagger_id", "tagger_type"], name: "index_taggings_on_tagger_id_and_tagger_type", using: :btree
+  add_index "taggings", ["tagger_id"], name: "index_taggings_on_tagger_id", using: :btree
+
+  create_table "tags", force: :cascade do |t|
+    t.string  "name"
+    t.integer "taggings_count", default: 0
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -41,4 +200,21 @@ ActiveRecord::Schema.define(version: 20161008021617) do
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "votes", force: :cascade do |t|
+    t.integer  "votable_id"
+    t.string   "votable_type"
+    t.integer  "voter_id"
+    t.string   "voter_type"
+    t.boolean  "vote_flag"
+    t.string   "vote_scope"
+    t.integer  "vote_weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["votable_id", "votable_type", "vote_scope"], name: "index_votes_on_votable_id_and_votable_type_and_vote_scope", using: :btree
+  add_index "votes", ["voter_id", "voter_type", "vote_scope"], name: "index_votes_on_voter_id_and_voter_type_and_vote_scope", using: :btree
+
+  add_foreign_key "member_comments", "member_videos"
+  add_foreign_key "posts", "users"
 end
