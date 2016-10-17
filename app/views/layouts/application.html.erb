@@ -7,14 +7,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header>
-  <% if current_user %>
-      <%= link_to "welcome:#{current_user.email}", "#" %>
-      <%= link_to "退出", destroy_user_session_path, method: 'delete' %>
-  <% end %>
-</header>
-
+<%= render 'shared/navbar' %>
+<%= render 'shared/flash' %>
 <%= yield %>
+<%= render 'shared/footer' %>
 
 </body>
 </html>

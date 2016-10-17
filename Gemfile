@@ -23,6 +23,11 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise','~> 3.5.10'
+gem 'survey'
+gem 'twitter-bootstrap-rails'
+gem 'kaminari' # pagination
+gem 'client_side_validations', github: 'DavyJonesLocker/client_side_validations' # validates forms on the client side
+gem 'puma'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
