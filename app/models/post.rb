@@ -9,4 +9,5 @@
 #
 
 class Post < ActiveRecord::Base
+  mount_uploader :cover, PostCoverUploader
 end
