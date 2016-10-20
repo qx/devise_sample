@@ -1,3 +1,12 @@
+# == Schema Information
+#
+# Table name: roles
+#
+#  name          :string
+#  resource_id   :integer
+#  resource_type :string
+#
+
 require 'rails_helper'
 
 RSpec.describe Role, type: :model do

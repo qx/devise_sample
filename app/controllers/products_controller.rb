@@ -1,6 +1,8 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+  # load_and_authorize_resource param_method: :product_params
+
   # GET /products
   # GET /products.json
   # for member

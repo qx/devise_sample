@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+
+  # delete "roles/destroy/:id(.:format)" => "roles#destroy", as: "delete_role"
+  resources :roles
+
   resources :products
   resources :members
   resources :manages

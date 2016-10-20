@@ -1,5 +1,6 @@
 class ManagesController < ApplicationController
   before_action :set_manage, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   # GET /manages
   # GET /manages.json
@@ -14,6 +15,7 @@ class ManagesController < ApplicationController
 
   # GET /manages/new
   def new
+    byebug
     @manage = Manage.new
   end
 

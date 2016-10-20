@@ -1,3 +1,10 @@
+# == Schema Information
+#
+# Table name: members
+#
+#  name       :string
+#
+
 require 'rails_helper'
 
 RSpec.describe Member, type: :model do

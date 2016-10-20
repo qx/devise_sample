@@ -180,15 +180,15 @@ PLATFORMS
 
 DEPENDENCIES
   byebug
-  cancancan
+  cancancan (~> 1.15.0)
   coffee-rails (~> 4.1.0)
   devise (~> 3.5.10)
   jbuilder (~> 2.0)
   jquery-rails
   pg (~> 0.15)
-  rails (= 4.2.7.1)
-  rolify
-  rspec-rails
+  rails (~> 4.2.7.1)
+  rolify (~> 5.1.0)
+  rspec-rails (~> 3.5.2)
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring

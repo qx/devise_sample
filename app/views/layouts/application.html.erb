@@ -8,13 +8,41 @@
 </head>
 <body>
 <header>
+  <% flash %>
+  <% flash.each do |message_type, message| %>
+      <div class="alert alert-<%= message_type %>"><%= message %></div>
+  <% end %>
   <% if current_user %>
       <%= link_to "welcome:#{current_user.email}", "#" %>
       <%= link_to "退出", destroy_user_session_path, method: 'delete' %>
+      <br>
+      当前角色: <%= current_user.roles_name %>
+      <% current_user.roles.each do |role| %>
+          <%= link_to "删除角色#{role.name}", role, method: :delete, data: {confirm: 'Are you sure?'} %>
+      <% end %>
+
+      </br>
   <% end %>
+  <% if current_user.has_role? :manage %>
+<p> <%= link_to "管理员页面", manages_path %>
+  </p>
+  <% end%>
+
+  <p><%= link_to "会员页面", members_path %>
+  </p>
 </header>
+
 
 <%= yield %>
 
 </body>
 </html>
+<style>
+  .alert {
+    background: #ff0022;
+  }
+
+  .alert-notice {
+    background: #fae7a8;
+  }
+</style>

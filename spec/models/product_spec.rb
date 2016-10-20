@@ -1,3 +1,10 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  name       :string
+#
+
 require 'rails_helper'
 
 RSpec.describe Product, type: :model do
