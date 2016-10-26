@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :posts
   get 'events' => "posts#events"
+  get 'redis_events' => "posts#redis_events"
   root to: "posts#index"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

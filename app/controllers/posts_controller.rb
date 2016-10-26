@@ -1,15 +1,32 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   include ActionController::Live
 
+  #普通消息推送
   def events
-
     response.headers["Content-Type"]="text/event-stream"
-    response.stream.write "data: hello,Browser! #{Post.last.title}\n\n"#   source.addEventListener('message', function(e){})
+      response.stream.write "data: hello,Browser! #{Post.last.title}\n\n" #   source.addEventListener('message', function(e){})
+      response.stream.write "event: mydata\nid: 10222\ndata: this is new stuff on the 'mydata' event\n\n" #   source.addEventListener('mydata', function(e){})
+    response.stream.close
+  end
 
-    response.stream.write "event: mydata\nid: 10222\ndata: this is new stuff on the 'mydata' event\n\n"#   source.addEventListener('mydata', function(e){})
-
+  #通过redis订阅发送给客户端消息
+  def redis_events
+    response.headers["Content-Type"] = "text/event-stream"
+    redis = Redis.new
+    redis.subscribe('item') do |on|
+      on.message do |event, data|
+        # Rails.logger("data:#{data}")
+        response.stream.write("data: #{data}\n\n")
+      end
+    end
+    # 超时断开链接
+    # $redis.subscribe_with_timeout(5, "news") do |on|
+    #   on.message do |channel, message|
+    #     response.stream.write("data: #{data}\n\n")
+    #   end
+    # end
     response.stream.close
   end
 

@@ -29,6 +29,8 @@ gem 'devise','~> 3.5.10'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
+gem 'redis'
+gem 'redis-namespace'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
