@@ -1,10 +1,21 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+
+  # before_action :authenticate_user!
   # GET /posts
   # GET /posts.json
+  # def slow_action
+  #   sleep 15
+  #   # todo - print something here
+  #   puts "sleep finished"
+  # end
   def index
-    @posts = Post.all
+    expires_in 5.minutes
+    @posts = Rails.cache.fetch(:slow_object) do
+      # sleep 8
+       Post.all
+    end
+
   end
 
   # GET /posts/1

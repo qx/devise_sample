@@ -13,6 +13,7 @@
       <%= link_to "退出", destroy_user_session_path, method: 'delete' %>
   <% end %>
 </header>
+Page Rendered in <%= sprintf('%.3f', (Time.now.to_f - @start_time) ) %> seconds
 
 <%= yield %>
 

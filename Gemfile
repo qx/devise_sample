@@ -28,10 +28,12 @@ gem 'devise','~> 3.5.10'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
-
+gem 'puma'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
+gem 'dalli'
+gem 'quiet_assets', group: :development
+gem 'faker'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

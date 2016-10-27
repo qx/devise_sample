@@ -1,0 +1,12 @@
+<% cache post do %>
+    <li> <%= post.title %>  </li>
+    <li><%= post.content %></li>
+    <li>cache_key:<%= post.cache_key %></li>
+    <div>=======comments cache digest will not work ======</div>
+    <%= render post.recent_comments %>
+<!--  Couldn't find template for digesting: recent_comments/recent_comment
+-->
+    <div>=======以下代码需要完全注释才能 看出cache diget无法生效的效果 explict partial comments======</div>
+    <%= render partial: 'comments/comment',collection: post.recent_comments %>
+
+<% end %>
