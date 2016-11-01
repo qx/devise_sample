@@ -6,9 +6,9 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     if params[:tag]
-      @posts = Post.tagged_with(params[:tag])
+      @posts = Post.tagged_with(params[:tag], :on => 'tags')
     elsif params[:skill]
-      @posts = Post.tagged_with(params[:skill])
+      @posts = Post.tagged_with(params[:skill], :on => 'skills')
     else
       @posts = Post.all
     end
@@ -33,7 +33,7 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    byebug
+    # byebug
     @post = current_user.posts.new(post_params)
     # byebug
     # @user_who_commented = current_user
