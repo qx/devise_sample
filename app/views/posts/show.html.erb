@@ -13,6 +13,9 @@
   <strong>image:</strong>
 <p><%= @post.image.url %></p>
 <%= image_tag @post.image.url %>
+<%= image_tag @post.image.small.url %>
+<%= image_tag @post.image.icon.url %>
+<%= image_tag @post.image.thumb.url %>
 </p>
 
 <%= link_to 'Edit', edit_post_path(@post) %> |
