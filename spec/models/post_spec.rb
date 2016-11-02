@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: posts
+#
+#  title      :string
+#  published  :boolean
+#
+
 require 'rails_helper'
 
 RSpec.describe Post, type: :model do
