@@ -1,4 +1,4 @@
-class PostImageUploader < BaseUploader
+class PostImageUploader < BaseImageUploader
   #
   # # Include RMagick or MiniMagick support:
   # # include CarrierWave::RMagick
@@ -7,7 +7,14 @@ class PostImageUploader < BaseUploader
   # # Choose what kind of storage to use for this uploader:
   # storage :file
   # # storage :fog
+  # def default_url
+  #   # For Rails 3.1+ asset pipeline compatibility:
+  #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   #
+  #   # "/images/fallback/" + [version_name, "default.png"].compact.join('_')
+  #   "http://ociweb.oss-cn-hangzhou.aliyuncs.com/uploads/my_file/name/pp.png"
+  #
+  # end
   # # Override the directory where uploaded files will be stored.
   # # This is a sensible default for uploaders that are meant to be mounted:
   # def store_dir

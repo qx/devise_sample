@@ -4,6 +4,8 @@
 #
 #  title      :string
 #  published  :boolean
+#  image      :string
+#  attach     :string
 #
 
 require 'rails_helper'
