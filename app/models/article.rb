@@ -1,10 +1,10 @@
 # == Schema Information
 #
-# Table name: posts
+# Table name: articles
 #
 #  content    :text
 #
 
-class Post < ActiveRecord::Base
+class Article < ActiveRecord::Base
   has_many :comments, as: :commentable
 end
