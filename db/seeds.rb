@@ -7,5 +7,11 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 100.times do
-  Post.create(:title => "kfsjdifwuqepri]]",:content => "2341893iejrfkwejnf")
+
+  user = User.create(:email => Faker::Internet.email, :password => Faker::Internet.password(8))
+
+
+  4.times do
+    user.posts.create(:title => Faker::Name.title, :content => Faker::Hipster.sentence(3))
+  end
 end
